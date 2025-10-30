@@ -9,8 +9,16 @@ class UpdateTxt extends Observer {
   }
   update(observable, args) {
     // update the view according to the model
-    console.log(observable.comment)
-    /* this.view.lesavis.appendChild(observable.comment); */
+    /* for (com in observable.comment){
+        let commentaire = this.view.makeavis(com)
+        console.log(commentaire);
+        this.view.lesavis.appendChild(commentaire);
+     } */
+
+    let unavis = observable.comment[observable.comment.length - 1];
+    let avisdiv = this.view.makeavis(unavis);
+    console.log(avisdiv);
+    this.view.lesavis.appendChild(avisdiv);
   }
 }
 
@@ -45,19 +53,16 @@ class Controler {
       let AddAvis = (event) => {
           event.preventDefault();
           let avis = this.view.getavis();
-          console.log(avis);
-          
-          if(avis != ""){
+          if(avis.textContent !== ""){
               this.model.addavis(avis);
+              this.view.formulaire.querySelector("#avis").value = ""
           }
-          this.view.formulaire.querySelector("#avis").value = "";
           this.view = new NewView();
       }
-
-      let retour = (event) => {
+      /* let retour = (event) => {
           event.preventDefault();
           this.view = new View();
-      }
+      } */
 
       this.view.formulaire.addEventListener('submit', AddAvis);
     /*   this.view.button.addEventListener('click', retour); */

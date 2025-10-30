@@ -26,7 +26,7 @@ class View {
                 <p class="card-text" style="margin-left:535px;">Donnez votre avis</p>
             </div>
          </div>
-        <div class="mb-4" style="background-color:#E6CFA9; padding:20px; border-radius:15px; margin-top:10px">
+        <div class="mb-4" style="background-color:#E6CFA9; padding:20px; border-radius:15px; margin-top:10px;">
             <div class="card-body" id="perso" style="width: 120px; width: 120px; text-align: center; margin: auto;">
                 <img src="images/mortadon.jpg" alt="" style=" width: 100%; border-radius: 50%;">
                 <p class="card-text">Clément</p>
@@ -42,8 +42,10 @@ class View {
                     <textarea id="avis" class="form-control" rows="3" placeholder=""></textarea>
                 </div>
     
-                <button type="submit" class="btn btn-success w-100" style="background-color: #C1856D; font-weight:bold">Envoyer</button>
-            </form>
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn w-15" style="color:white;background-color: #C1856D; font-weight:bold">Envoyer</button>
+                </div>
+                </form>
 
         </div>
           
@@ -78,7 +80,6 @@ class View {
 
     // pour y accéder depuis ton contrôleur
     this.formulaire = this.body.querySelector("#formulaire");
-    this.lesavis = this.body.querySelector("#lesavis");
   }
 
   getavis = function() {
@@ -87,6 +88,36 @@ class View {
         let p = document.createElement("p");
         p.textContent = this.formulaire.querySelector("#avis").value;
         UnAvis.appendChild(p)
+        return UnAvis;
+  }
+   makeavis = function(avis){
+     
+     let UnAvis = document.createElement("div");
+        UnAvis.className = "mb-3 d-flex justify-content-start align-items-center";
+        UnAvis.style.backgroundColor = "#E6CFA9";
+        UnAvis.style.padding = "15px";
+        UnAvis.style.borderRadius = "10px";
+        UnAvis.style.marginTop = "10px";
+        let icon = document.createElement("i");
+        icon.className = "fa-solid fa-circle-user fa";
+        icon.style.fontSize = "40px";
+        let ms3 = document.createElement("div");
+        ms3.className = "ms-3";
+        let ratingDiv = document.createElement("div");
+        ratingDiv.className = "rating";
+        ratingDiv.id = "rating";
+        for(let i=1; i<=5; i++){
+            let star = document.createElement("i");
+            star.className = "fa fa-star";
+            star.setAttribute("data-value", i);
+            ratingDiv.appendChild(star);
+        }
+        let p = document.createElement("p");
+        p.textContent = avis;
+        ms3.appendChild(ratingDiv);
+        ms3.appendChild(p);
+        UnAvis.appendChild(icon);
+        UnAvis.appendChild(ms3);
         return UnAvis;
   }
 }
@@ -106,10 +137,49 @@ class NewView{
                 </ul>
             </div>
         </nav>
-        <main class="container my-5" style="min-height: 80vh; ">
-            <div>Notre nouvelle vue</div>
-            <button type="submit">Donner une avis</button>
+         <main class="container my-5" style="min-height: 80vh; ">
+            <div class="mb-4" style="background-color:#E6CFA9; padding:20px; border-radius:15px; margin-top:10px;">
+                <div class="card-body" id="perso" style="width: 120px; width: 120px; text-align: center; margin: auto;">
+                    <img src="images/mortadon.jpg" alt="" style=" width: 100%; border-radius: 50%;">
+                    <p class="card-text">Clément</p>
+                    <div class="rating" id="rating">
+                        <i class="fa fa-star" data-value="1"></i>
+                        <i class="fa fa-star" data-value="2"></i>
+                        <i class="fa fa-star" data-value="3"></i>
+                        <i class="fa fa-star" data-value="4"></i>
+                        <i class="fa fa-star" data-value="5"></i>
+                    </div>
+                </div>
+                <p style="margin:auto;">
+                    Passioné de lecture, Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                    Integer semper  enim vel enim rutrum sodales. Donec et iaculis lorem. Integer 
+                    nec  aliquam ipsum, ut gravida purus. Maecenas sodales eget ipsum quis  dignissim. 
+                    Praesent tincidunt leo sem, et laoreet enim laoreet id.  Nullam in risus dapibus, 
+                    ultrices tellus quis, dictum sem.
+                </p>
+                 <div class="d-flex justify-content-center">
+                    <a href="" style="margin:auto; color: white;text-decoration:none; padding:5px 20px; background-color: #C1856D; border-radius: 7px;">Voir la librairie</a>
+                </div>
+            </div>
+            <p>Avis (42)</p>
+            <div class="mb-4" id="lesavis">
+                <div class="mb-3 d-flex justify-content-start align-items-center" id="unavis" style="background-color:#E6CFA9; padding:15px; border-radius:10px; margin-top:10px;">
+                    <i class="fa-solid fa-circle-user fa" style="font-size:40px"></i>
+                    <div class="ms-3">
+                        <div class="rating" id="rating">
+                            <i class="fa fa-star" data-value="1"></i>
+                            <i class="fa fa-star" data-value="2"></i>
+                            <i class="fa fa-star" data-value="3"></i>
+                            <i class="fa fa-star" data-value="4"></i>
+                            <i class="fa fa-star" data-value="5"></i>
+                         </div>
+                        <p>Super expérience, le personnel était très accueillant et la sélection de livres était excellente.
+                    </div>
+                </div>
+            </div>
         </main>
+
+
         <footer class="text-light text-center py-3" style="background-color: #9A3F3F; margin-bottom: 0;">
             <div class="mb-3">
                 <p>VOULE-VOUS UN LVRES ? BIEN VOUS ÊTES AU BON ENDROIT</p>
@@ -134,6 +204,8 @@ class NewView{
             </div>
         </footer>
         `
+        this.lesavis = this.body.querySelector("#lesavis");
         this.button = this.body.querySelector("button");
     }
+  
 }
