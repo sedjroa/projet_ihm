@@ -90,7 +90,7 @@ class View {
         UnAvis.appendChild(p)
         return UnAvis;
   }
-   makeavis = function(avis){
+    makeavis = function(avis){
      
      let UnAvis = document.createElement("div");
         UnAvis.className = "mb-3 d-flex justify-content-start align-items-center";
@@ -120,13 +120,10 @@ class View {
         UnAvis.appendChild(ms3);
         return UnAvis;
   }
-}
 
-class NewView{
-    constructor() {
-        this.body = document.body;
-        this.body.innerHTML = `
-        <nav class="navbar navbar-expand-lg text-light" style="background-color: #9A3F3F;">
+  changeView = function(){
+    this.body.innerHTML = `
+       <nav class="navbar navbar-expand-lg text-light" style="background-color: #9A3F3F;">
             <div class="container-fluid">
                 <img src="" alt="" width="40" height="40" class="d-inline-block align-text-top me-2" style="background-color: white; border-radius: 50%;">
                 <a class="navbar-brand text-light" href="#">Prêt-à-Lire</a>
@@ -158,10 +155,10 @@ class NewView{
                     ultrices tellus quis, dictum sem.
                 </p>
                  <div class="d-flex justify-content-center">
-                    <a href="" style="margin:auto; color: white;text-decoration:none; padding:5px 20px; background-color: #C1856D; border-radius: 7px;">Voir la librairie</a>
+                    <a href="#" style="margin:auto; color: white;text-decoration:none; padding:5px 20px; background-color: #C1856D; border-radius: 7px;">Voir la librairie</a>
                 </div>
             </div>
-            <p>Avis (42)</p>
+            <p id="Nbavis">Avis (42)</p>
             <div class="mb-4" id="lesavis">
                 <div class="mb-3 d-flex justify-content-start align-items-center" id="unavis" style="background-color:#E6CFA9; padding:15px; border-radius:10px; margin-top:10px;">
                     <i class="fa-solid fa-circle-user fa" style="font-size:40px"></i>
@@ -204,8 +201,10 @@ class NewView{
             </div>
         </footer>
         `
+        this.body = document.body;
         this.lesavis = this.body.querySelector("#lesavis");
+        this.formulaire = this.body.querySelector("#formulaire");
         this.button = this.body.querySelector("button");
-    }
-  
+        this.totalavis = this.body.querySelector("#Nbavis");
+  }
 }

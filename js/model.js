@@ -11,7 +11,7 @@ class Model extends Observable {
     
     constructor(){
         super();
-        this.comment = [
+        this.comments = [
             "J'aime particulièrement les livres de John Grisham. Je les voulais en physique sans faire 20km pour aller dans une médiathèques. Elibrary est une idée géniale. Je vous le recommande.",
             "Application très utile pour les amateurs de lecture comme moi. La variété des livres disponibles est impressionnante et l'interface est conviviale.",
             "Je suis ravi de pouvoir emprunter des livres numériques facilement via cette plateforme. Cela m'a permis de découvrir de nouveaux auteurs que je n'aurais pas lus autrement."
@@ -19,8 +19,7 @@ class Model extends Observable {
     }
 
     addavis(avis){
-       /*  this.comment.push(avis); */
-        this.comment.push(avis.textContent);
+        this.comments.push(avis.textContent);
         this.setChanged();
         this.notifyObservers();
     }

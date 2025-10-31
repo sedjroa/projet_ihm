@@ -8,17 +8,14 @@ class UpdateTxt extends Observer {
     this.view = view;
   }
   update(observable, args) {
-    // update the view according to the model
-    /* for (com in observable.comment){
-        let commentaire = this.view.makeavis(com)
-        console.log(commentaire);
-        this.view.lesavis.appendChild(commentaire);
-     } */
 
-    let unavis = observable.comment[observable.comment.length - 1];
-    let avisdiv = this.view.makeavis(unavis);
-    console.log(avisdiv);
-    this.view.lesavis.appendChild(avisdiv);
+    let commentaires = observable.comments;
+    for(let i=0; i<commentaires.length; i++){
+      let avis = this.view.makeavis(commentaires[i])
+      this.view.lesavis.appendChild(avis)
+    }
+    this.view.totalavis.textContent = "Avis ("+ (++commentaires.length) + ")";
+  
   }
 }
 
@@ -41,8 +38,8 @@ class Controler {
 
       // **** 1. update
       // instanciate the updates
-      let updateTxt  = new UpdateTxt(this.view);
-      this.model.addObservers(updateTxt);
+      /* let updateTxt  = new UpdateTxt(this.view);
+      this.model.addObservers(updateTxt); */
 
       // link the updates to the model
 
@@ -54,20 +51,24 @@ class Controler {
           event.preventDefault();
           let avis = this.view.getavis();
           if(avis.textContent !== ""){
+              this.view.changeView()
+
+
+              this.model.removeObserver(); 
+              this.updateTxt = new UpdateTxt(this.view);
+              this.model.addObservers(this.updateTxt);
+
               this.model.addavis(avis);
-              this.view.formulaire.querySelector("#avis").value = ""
+
+              if (this.view.formulaire) {
+                 this.view.formulaire.querySelector("#avis").value = "";
+              } 
           }
-          this.view = new NewView();
       }
-      /* let retour = (event) => {
-          event.preventDefault();
-          this.view = new View();
-      } */
 
       this.view.formulaire.addEventListener('submit', AddAvis);
-    /*   this.view.button.addEventListener('click', retour); */
 
-      // ajouter un this.model.init contenant un this.model.notifyObservers()
+      this.model.notifyObservers()
 
       // let actionButton = (event) => { ... }
       // link the actions to the view's widgets
